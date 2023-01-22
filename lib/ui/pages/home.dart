@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path_provider/path_provider.dart';
-import '../../core/providers/providers.dart';
 import '../../core/services/translator/translator.dart';
 import '../theme/colors.dart';
 import '../theme/theme.dart';
@@ -13,21 +12,21 @@ class HomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final socket = ref.watch(socketProvider);
+    // final socket = ref.watch(socketProvider);
     return Scaffold(
       backgroundColor: primaryColor,
       appBar: AppBar(
-        backgroundColor: primaryBlack,
+        backgroundColor: backgroundWhiteSmoke,
         title: SelectableText(
-          translator.get("app-title"),
+          translator.get("home.title"),
           style: primaryTextStyleBold,
         ),
       ),
       body: SizedBox.expand(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ElevatedButton(
+          children: const [
+            /* ElevatedButton(
               child: Text(translator.get("home.button.send_file")),
               onPressed: () async {
                 final fileSender =
@@ -48,7 +47,7 @@ class HomePage extends ConsumerWidget {
                 );
                 await socket.sendFile(fileSender, "filename.txt");
               },
-            ),
+            ), */
           ],
         ),
       ),

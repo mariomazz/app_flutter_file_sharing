@@ -1,17 +1,18 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
 
-final Translator translator = Translator.instance;
+final Translator translator = Translator.getInstance();
 
 class Translator {
   static late final Translator _instance;
-  static Translator get instance => _instance;
+  static Translator getInstance() => _instance;
   static const _languagesSupported = ["it", "en"];
   static Future<Translator> loadLanguage() async {
-    _instance = Translator();
-    _instance._setJson(
-        await _instance._fetchLanguage(await _instance._getDefaultLanguage()));
-    return _instance;
+    final instance = Translator();
+    instance._setJson(
+        await instance._fetchLanguage(await instance._getDefaultLanguage()));
+    _instance = instance;
+    return instance;
   }
 
   final _json = <String, dynamic>{};

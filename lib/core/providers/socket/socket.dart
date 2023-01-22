@@ -60,7 +60,7 @@ class SocketIOServiceProvider with ChangeNotifier {
   void _onFileReceive() {
     if (_socketId.isNotEmpty) {
       _socket.on("client.${SocketChannels.filesSocket}.$_socketId", (data) {
-        Logger.log("client file received => " + data.toString());
+        Logger.log("client file received => $data");
         final file = filemodel.FileModel.fromJson(json.decode(data));
         _files
             .add(File.fromRawPath(base64.decode(file.file?.fileBase64 ?? '')));

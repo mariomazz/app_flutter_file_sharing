@@ -1,4 +1,7 @@
 {
-    "app-title": "FileSharing",
-    "home.button.send_file": "inia un file alla socket"
+    "app.title": "FileSharing",
+    "home.title": "Home page",
+    "settings.title": "Settings page",
+    "chat.title": "Chat page",
+    "notifications.title": "Notifications page"
 }
