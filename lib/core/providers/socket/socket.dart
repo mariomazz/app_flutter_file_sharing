@@ -44,10 +44,8 @@ class SocketIOServiceProvider with ChangeNotifier {
       _socket.emit(
         "${SocketChannels.filesSocket}.$_socketId",
         json.encode({
-          "file": {
-            "filename": filename,
-            "fileBase64": base64.encode(await file.readAsBytes()),
-          },
+          "filename": filename,
+          "fileBase64": base64.encode(await file.readAsBytes()),
           "id": const Uuid().v1(),
         }),
       );
@@ -62,8 +60,7 @@ class SocketIOServiceProvider with ChangeNotifier {
       _socket.on("client.${SocketChannels.filesSocket}.$_socketId", (data) {
         Logger.log("client file received => $data");
         final file = filemodel.FileModel.fromJson(json.decode(data));
-        _files
-            .add(File.fromRawPath(base64.decode(file.file?.fileBase64 ?? '')));
+        _files.add(File.fromRawPath(base64.decode(file.fileBase64 ?? '')));
         Logger.log("file receive and added to list");
       });
     } else {

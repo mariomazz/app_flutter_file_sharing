@@ -1,39 +1,40 @@
+import 'dart:convert';
+
+FileModel fileModelFromJson(String str) => FileModel.fromJson(json.decode(str));
+
+String fileModelToJson(FileModel data) => json.encode(data.toJson());
+
 class FileModel {
-  File? file;
-  String? id;
+  FileModel({
+    this.id,
+    this.filename,
+    this.fileBase64,
+  });
 
-  FileModel({this.file, this.id});
+  final String? id;
+  final String? filename;
+  final String? fileBase64;
 
-  FileModel.fromJson(Map<String, dynamic> json) {
-    file = json['file'] != null ? File.fromJson(json['file']) : null;
-    id = json['id'];
-  }
+  FileModel copyWith({
+    String? id,
+    String? filename,
+    String? fileBase64,
+  }) =>
+      FileModel(
+        id: id ?? this.id,
+        filename: filename ?? this.filename,
+        fileBase64: fileBase64 ?? this.fileBase64,
+      );
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    if (file != null) {
-      data['file'] = file!.toJson();
-    }
-    data['id'] = id;
-    return data;
-  }
-}
+  factory FileModel.fromJson(Map<String, dynamic> json) => FileModel(
+        id: json["id"],
+        filename: json["filename"],
+        fileBase64: json["fileBase64"],
+      );
 
-class File {
-  String? filename;
-  String? fileBase64;
-
-  File({this.filename, this.fileBase64});
-
-  File.fromJson(Map<String, dynamic> json) {
-    filename = json['filename'];
-    fileBase64 = json['fileBase64'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['filename'] = filename;
-    data['fileBase64'] = fileBase64;
-    return data;
-  }
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "filename": filename,
+        "fileBase64": fileBase64,
+      };
 }
