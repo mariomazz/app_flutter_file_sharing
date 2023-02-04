@@ -12,6 +12,7 @@ class GetMaterialApp extends ConsumerWidget {
       routerConfig: ref.read(routing).goRouter,
       title: 'Flutter Demo',
       theme: ThemeData(
+        useMaterial3: true,
         primarySwatch: Colors.blue,
       ),
     );
